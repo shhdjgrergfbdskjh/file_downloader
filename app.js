@@ -1,5 +1,5 @@
 // Configuration for Cloudflare Worker
-const WORKER_URL = 'https://your-worker.your-subdomain.workers.dev';
+const WORKER_URL = 'https://sweet-unit-4abb.shhdjgrergfbdskjh.workers.dev';
 
 let downloadStats = JSON.parse(localStorage.getItem('downloadStats')) || {
     totalDownloads: 0,
@@ -61,10 +61,7 @@ async function startDownload() {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-                action: 'download',
-                url: fileUrl
-            })
+            body: JSON.stringify({ url: fileUrl })
         });
 
         if (!response.ok) {
