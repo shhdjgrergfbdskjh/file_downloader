@@ -1,33 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Large File Downloader</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free File Downloader</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h2>Download a File via Cloudflare</h2>
-  <input type="text" id="url" placeholder="Enter file URL" size="50">
-  <button onclick="download()">Download</button>
-  <p id="status"></p>
-
-  <script>
-    async function download() {
-      const url = document.getElementById("url").value;
-      document.getElementById("status").textContent = "Requesting Worker...";
-
-      const res = await fetch(`https://your-cloudflare-subdomain.workers.dev/?url=${encodeURIComponent(url)}`);
-      
-      if (res.ok) {
-        const blob = await res.blob();
-        const downloadUrl = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = downloadUrl;
-        a.download = url.split('/').pop();
-        a.click();
-        document.getElementById("status").textContent = "Download complete!";
-      } else {
-        document.getElementById("status").textContent = "Download failed.";
-      }
-    }
-  </script>
+    <div class="container">
+        <h1>📁 Free File Downloader</h1>
+        <div class="upload-section">
+            <input type="url" id="fileUrl" placeholder="Enter file URL to download" required>
+            <button onclick="startDownload()">Download File</button>
+        </div>
+        
+        <div id="progressContainer" class="progress-container" style="display: none;">
+            <div class="progress-bar">
+                <div id="progressBar" class="progress-fill"></div>
+            </div>
+            <div id="progressText" class="progress-text">0%</div>
+            <div id="downloadSpeed" class="speed-text"></div>
+        </div>
+        
+        <div id="downloadStats" class="stats-container">
+            <h3>Download Statistics</h3>
+            <div id="statsDisplay"></div>
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
 </body>
 </html>
